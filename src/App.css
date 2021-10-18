@@ -95,6 +95,33 @@ button {
   cursor: pointer;
 }
 
+.result {
+  display: grid;
+  grid-template-columns: 85% 15%;
+  order: 4;
+  width: 85%;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  position: absolute;
+  bottom: 30%;
+  background: beige;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+.result p {
+  color: var(--text);
+  font-weight: 600;
+  border-radius: 5px;
+  margin:0;
+  padding-top: 5px;
+}
+.copy {
+  padding: 5px 10px;
+  margin: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     max-width: 500px;
@@ -165,12 +192,21 @@ button {
 
   .result {
     order: 4;
+    width: 95%;
     background: beige;
-    margin-top: 10px;
+    grid-row-start: unset; 
+    grid-row-end: unset;
+    position: unset;
+    margin: 0 auto;
+    grid-template-columns: 75% 25%;
+    padding: 0;
   }
   .result_item {
     text-align: center;
     font-weight: 600;
+  }
+  .result p {
+    font-size: 11px;
   }
   .saved_link {
     order: 5;
@@ -178,5 +214,10 @@ button {
     margin-top: 10px;
     text-align: center;
     font-weight: 600;
+  }
+  .copy {
+    padding: 1px 5px;
+    padding: 1px 5px;
+    font-size: 15px;
   }
 }

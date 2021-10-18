@@ -6,6 +6,7 @@ import "./App.css";
 
 function App() {
   const [shortLink, setShortLink] = useState(null);
+  const [buttonText, setButtonText] = useState("Copy");
   const linkInputRef = useRef();
   let links = [];
   const submitHandler = async (event) => {
@@ -13,23 +14,54 @@ function App() {
 
     const enteredLink = linkInputRef.current.value;
 
-    const response = await fetch(
-      `https://api.shrtco.de/v2/shorten?url=${enteredLink}`
-    );
-    const data = await response.json();
+    // const response = await fetch("https://just.darshit.dev/shorten", {
+    //   body: value,
+    //   mode: "no-cors",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   method: "POST",
+    //   redirect: 'follow'
+    // });
+    // const data = await response;
 
-    console.log(data);
+    
 
-    if (data.ok === true) {
-      setShortLink(data.result);
-    }
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "*/*");
+
+    var raw = JSON.stringify({
+      url: enteredLink,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://just.darshit.dev/shorten",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setShortLink(result))
+      .catch((error) => console.log("error", error));
   };
 
+
+
   if (shortLink && localStorage.getItem("link")) {
-    links.push(shortLink.full_short_link);
+    links.push(shortLink.shortUrl);
   }
   if (shortLink && !localStorage.getItem("link")) {
-    localStorage.setItem("link", shortLink.full_short_link);
+    localStorage.setItem("link", shortLink.shortUrl);
+  }
+
+  const copyClipboard = (text) => {
+    navigator.clipboard.writeText(shortLink.shortUrl)
+    setButtonText(text)
   }
   console.log(links);
 
@@ -45,7 +77,10 @@ function App() {
               <h1>
                 <span>Long links</span> Make it shorter.
               </h1>
-              <h2>A free URL Shortener to create a shortened link making it easy to use.</h2>
+              <h2>
+                A free URL Shortener to create a shortened link making it easy
+                to use.
+              </h2>
             </div>
             <div className="hero">
               <img src={HeroImg} alt="main hero" />
@@ -62,15 +97,27 @@ function App() {
             </div>
             {shortLink && (
               <div className="result">
-                <p className="result_item">{shortLink.full_short_link}</p>
+                <p className="result_item">{shortLink.shortUrl}</p>
+                <button
+                  className="copy"
+                  onClick={() => copyClipboard("copied")}
+                >
+                  {buttonText}
+                </button>
               </div>
             )}
             {/* {links &&
-            links.map((link) => (
-              <div className="saved_link">
-                <p className="result_item">{link}</p>
-              </div>
-            ))} */}
+              links.map((link) => (
+                <div className="result">
+                  <p className="result_item">{link}</p>
+                  <button
+                    className="copy"
+                    onClick={() => navigator.clipboard.writeText(link)}
+                  >
+                    Copy
+                  </button>
+                </div>
+              ))} */}
           </main>
         </section>
       </div>
