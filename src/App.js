@@ -36,38 +36,43 @@ function App() {
   return (
     <Fragment>
       <div className="container">
-        <nav>
+        <div className="navbar">
           <p>Kutly</p>
-        </nav>
-        <main>
-          <div className="hero_header">
-            <h1>A simple and free URL shortner</h1>
-          </div>
-          <div className="hero">
-            <img src={HeroImg} alt="main hero" />
-          </div>
-          <div className="form">
-            <form onSubmit={submitHandler}>
-              <input
-                type="text"
-                placeholder="Paste your link here.."
-                ref={linkInputRef}
-              />
-              <button>Shorten it</button>
-            </form>
-          </div>
-          {shortLink && (
-            <div className="result">
-              <p className="result_item">{shortLink.full_short_link}</p>
+        </div>
+        <section>
+          <main>
+            <div className="hero_header">
+              <h1>
+                <span>Long links</span> Make it shorter.
+              </h1>
+              <h2>A free URL Shortener to create a shortened link making it easy to use.</h2>
             </div>
-          )}
-          {/* {links &&
+            <div className="hero">
+              <img src={HeroImg} alt="main hero" />
+            </div>
+            <div className="form">
+              <form onSubmit={submitHandler}>
+                <input
+                  type="text"
+                  placeholder="Paste your link here.."
+                  ref={linkInputRef}
+                />
+                <button>Shorten it</button>
+              </form>
+            </div>
+            {shortLink && (
+              <div className="result">
+                <p className="result_item">{shortLink.full_short_link}</p>
+              </div>
+            )}
+            {/* {links &&
             links.map((link) => (
               <div className="saved_link">
                 <p className="result_item">{link}</p>
               </div>
             ))} */}
-        </main>
+          </main>
+        </section>
       </div>
     </Fragment>
   );
