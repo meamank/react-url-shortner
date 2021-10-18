@@ -42,7 +42,7 @@ function App() {
     };
 
     fetch(
-      "https://just.darshit.dev/shorten",
+      "https://53eb4870-2ef0-4458-9140-b7e9781e81a7.mock.pstmn.io/shorten",
       requestOptions
     )
       .then((response) => response.json())
