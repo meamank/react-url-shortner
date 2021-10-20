@@ -9,7 +9,6 @@ import Main from "./components/Main/Main";
 
 function App() {
   const [shortLink, setShortLink] = useState(null);
-  const [buttonText, setButtonText] = useState("Copy");
   const [isShown, setIsShown] = useState(false);
   const linkInputRef = useRef();
 
@@ -35,10 +34,7 @@ function App() {
     authCtx.logout();
   };
 
-  const copyClipboard = (text) => {
-    navigator.clipboard.writeText(shortLink.short_link);
-    setButtonText(text);
-  };
+  
 
   console.log(shortLink);
 
