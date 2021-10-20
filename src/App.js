@@ -8,7 +8,6 @@ import Main from "./components/Main/Main";
 function App() {
   const [isShown, setIsShown] = useState(false);
 
-
   const showLoginHandler = () => {
     setIsShown(true);
   };
