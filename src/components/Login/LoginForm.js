@@ -76,13 +76,14 @@ const LoginForm = (props) => {
         <form onSubmit={submitHandler}>
           <div className={classes.control}>
             <label htmlFor="email">Your Email</label>
-            <input type="email" id="email" required ref={emailInputRef} />
+            <input type="email" id="email" placeholder= "Email" required ref={emailInputRef} />
           </div>
           <div className={classes.control}>
             <label htmlFor="password">Your Password</label>
             <input
               type="password"
               id="password"
+              placeholder= "Password"
               required
               ref={passwordInputRef}
             />

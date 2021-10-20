@@ -8,7 +8,7 @@ const LinkForm = (props) => {
         placeholder="Paste your link here.."
         ref={props.linkInput}
       />
-      <button className= {`${classes.btn} ${classes.btn__primary}`}>Shorten it</button>
+      <button className= {`${classes.btn} ${classes.btn__primary}`}>Shorten</button>
     </form>
   );
 };

@@ -27,4 +27,6 @@ section {
   min-height: 80vh;
   background: var(--greyLight-1);
   margin-bottom: 20px;
+  position: absolute;
+  top: 15%;
 }

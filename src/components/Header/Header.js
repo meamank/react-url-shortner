@@ -6,11 +6,15 @@ const Header = (props) => {
 
   const authCtx = useContext(AuthContext)
 
+  const logoutHandler = () => {
+    authCtx.logout()
+  }
+
   return (
     <div className={classes.header}>
       <p>Kutly</p>
       {authCtx.isLoggedIn ? (
-        <button className= {`${classes.btn} ${classes.btn__primary}`} type="button" onClick={props.onLogout}>
+        <button className= {`${classes.btn} ${classes.btn__primary}`} type="button" onClick={logoutHandler}>
           Logout
         </button>
       ) : (

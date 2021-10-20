@@ -24,7 +24,7 @@ main {
   font-size: 20px;
   line-height: 22px;
   margin-top: 0;
-  color: rgb(136, 133, 133);
+  color: #56575b;
   font-weight: 500;
 }
 .form {
@@ -32,8 +32,41 @@ main {
   flex-flow: row nowrap;
   margin-top: 20px;
 }
+
+.result{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  background: none;
+  font-family: inherit;
+  color: var(--greyDark);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.result p {
+  padding-left: 10px;
+  margin: 0;
+}
+.result button {
+  color: var(--greyDark);
+  /* background: var(--main); */
+  border: unset;
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  transition: 0.3s ease;
+}
+
 .hero {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .hero img {
   width: 60%;
@@ -57,7 +90,14 @@ main {
     line-height: 22px;
     padding-right: 15px;
   }
+  .hero{
+    justify-content: end;
+  }
   .hero img {
     width: 80%;
+  }
+  .result p {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
