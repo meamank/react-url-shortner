@@ -1,14 +1,16 @@
 import classes from "./Main.module.css";
 import HeroImg from "../../assets/hero.svg";
 import LinkForm from "../UI/LinkForm";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useRef, useState } from "react";
+import { lightGreen } from "@mui/material/colors";
 
 const Main = (props) => {
   const [shortLink, setShortLink] = useState(null);
-  const [buttonText, setButtonText] = useState("Copy");
+  const [clipboardStatus, setClipboardStatus] = useState(false);
 
   const linkInputRef = useRef();
-
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -21,9 +23,9 @@ const Main = (props) => {
       .catch((error) => console.log("error", error));
   };
 
-  const copyClipboard = (text) => {
+  const copyClipboard = () => {
     navigator.clipboard.writeText(shortLink.short_link);
-    setButtonText(text);
+    setClipboardStatus(true)
   };
 
   return (
@@ -42,21 +44,20 @@ const Main = (props) => {
           <LinkForm onClick={submitHandler} linkInput={linkInputRef} />
         </div>
 
-        
-        {shortLink && <div className={classes.result}>
-          <p className="result_item">{shortLink.short_link}</p>
-          <button className="copy" onClick={() => copyClipboard("copied")}>
-            {buttonText}
-          </button>
-        </div>}
-      
+        {shortLink && (
+          <div className={classes.result}>
+            <p className="result_item">{shortLink.short_link}</p>
+            <button className="copy" onClick={() => copyClipboard("copied")}>
+              {clipboardStatus ? <DoneAllIcon sx={{ color: lightGreen[500] }} /> : <ContentCopyIcon />}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={classes.hero}>
         <img src={HeroImg} alt="main hero" />
       </div>
 
-      
       {/* {links &&
         links.map((link) => (
           <div className="result">

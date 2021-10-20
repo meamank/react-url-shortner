@@ -54,16 +54,15 @@ main {
 }
 .result button {
   color: var(--greyDark);
-  /* background: var(--main); */
+  background: none;
   border: unset;
-  padding: 5px 10px;
-  font-size: 18px;
+  padding-top: 5px;
   cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   transition: 0.3s ease;
 }
-
+.result button:hover{
+  color: var(--main);
+}
 .hero {
   display: flex;
   justify-content: center;
