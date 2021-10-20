@@ -27,9 +27,9 @@ const LoginForm = (props) => {
     let url;
 
     if (isLogin) {
-      url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyATohObT48z3aw1doZCzzYiprwu03GLeSA"
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
     } else {
-      url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyATohObT48z3aw1doZCzzYiprwu03GLeSA"
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`
     }
     fetch(
       url,
@@ -91,7 +91,7 @@ const LoginForm = (props) => {
 
           <div className={classes.actions}>
             {!isLoading && (
-              <button>{isLogin ? "Login" : "Create Account"}</button>
+              <button className= {`${classes.btn} ${classes.btn__primary}`} >{isLogin ? "Login" : "Create Account"}</button>
             )}
             {isLoading && <p>sending....</p>}
             <button

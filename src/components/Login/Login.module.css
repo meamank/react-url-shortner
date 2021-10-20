@@ -38,20 +38,26 @@
   flex-direction: column;
   align-items: center;
 }
-
-.actions button {
+.btn {
+  color: #fff;
+  background: var(--main);
+  border: unset;
+  padding: 0.5rem 1.5rem;
+  font-size: 18px;
   cursor: pointer;
-  font: inherit;
-  color: white;
-  background-color: var(--main);
-  border: 1px solid var(--main);
-  border-radius: 4px;
-  padding: 0.5rem 2.5rem;
+  border-radius: 5px;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  transition: 0.3s ease;
 }
-
-.actions button:hover {
-  background-color: var(--main);
-  border-color: var(--main);
+.btn__primary{
+  box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-light), inset -0.2rem -0.2rem 1rem var(--primary-dark), 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  color: var(--greyLight-1);
+}
+.btn__primary:hover {
+  color: var(--white);
+}
+.btn__primary:active {
+  box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-dark), inset -0.2rem -0.2rem 1rem var(--primary-light);
 }
 
 .actions .toggle {
