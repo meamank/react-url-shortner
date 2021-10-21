@@ -1,12 +1,13 @@
 import classes from "./Main.module.css";
 import HeroImg from "../../assets/hero.svg";
 import LinkForm from "../UI/LinkForm";
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
 import { lightGreen } from "@mui/material/colors";
 
-const Main = (props) => {
+const Main = () => {
   const [shortLink, setShortLink] = useState(null);
   const [clipboardStatus, setClipboardStatus] = useState(false);
 
@@ -25,8 +26,40 @@ const Main = (props) => {
 
   const copyClipboard = () => {
     navigator.clipboard.writeText(shortLink.short_link);
-    setClipboardStatus(true)
+    setClipboardStatus(true);
   };
+
+  // Get the existing data
+  var existing = localStorage.getItem("link");
+
+  // If no existing data, create an array
+  // Otherwise, convert the localStorage string to an array
+  existing = existing ? existing.split(",") : [];
+
+  // Add new data to localStorage Array
+  if (shortLink && existing.length <= 2) {
+    existing.unshift(shortLink.short_link);
+    // Save back to localStorage
+    localStorage.setItem("link", existing.toString());
+  } else if (shortLink && existing.length >= 3) {
+    existing.pop();
+    existing.unshift(shortLink.short_link);
+    localStorage.setItem("link", existing.toString());
+  }
+
+  
+    const removeExistingLinkHandler = (i) => {
+      // existing.splice(i, 1);
+      // localStorage.setItem("link", existing.toString());
+      const updatedArr = existing.filter((item,index) => index !== i)
+      existing = updatedArr
+      localStorage.setItem("link", existing.toString());
+      // console.log(i)
+    };
+  
+  // localStorage.setItem("link", existing.toString());
+
+  console.log(existing);
 
   return (
     <main>
@@ -36,7 +69,7 @@ const Main = (props) => {
             <span>Long links</span> Make it shorter.
           </h1>
           <h2>
-            A free URL Shortener to create a shortened link making it easy to
+            A free URL shortener to create a shortened link making it easy to
             use.
           </h2>
         </div>
@@ -48,28 +81,40 @@ const Main = (props) => {
           <div className={classes.result}>
             <p className="result_item">{shortLink.short_link}</p>
             <button className="copy" onClick={() => copyClipboard("copied")}>
-              {clipboardStatus ? <DoneAllIcon sx={{ color: lightGreen[500] }} /> : <ContentCopyIcon />}
+              {clipboardStatus ? (
+                <DoneAllIcon sx={{ color: lightGreen[500] }} />
+              ) : (
+                <ContentCopyIcon />
+              )}
             </button>
           </div>
         )}
+        {existing &&
+          existing.map((link, i) => (
+            <div className={classes.result} key={i}>
+              <p>{link}</p>
+              <div className={classes.dual_btn}>
+                <button
+                  className="copy"
+                  onClick={() => copyClipboard("copied")}
+                >
+                  {clipboardStatus ? (
+                    <DoneAllIcon sx={{ color: lightGreen[500] }} />
+                  ) : (
+                    <ContentCopyIcon />
+                  )}
+                </button>
+                <button  >
+                  <CloseIcon onClick={() => removeExistingLinkHandler(i)} />
+                </button>
+              </div>
+            </div>
+          ))}
       </div>
 
       <div className={classes.hero}>
         <img src={HeroImg} alt="main hero" />
       </div>
-
-      {/* {links &&
-        links.map((link) => (
-          <div className="result">
-            <p className="result_item">{link}</p>
-            <button
-              className="copy"
-              onClick={() => navigator.clipboard.writeText(link)}
-            >
-              Copy
-            </button>
-          </div>
-        ))} */}
     </main>
   );
 };
