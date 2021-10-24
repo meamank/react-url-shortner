@@ -27,10 +27,6 @@ const Main = () => {
 
     var requestOptions = {
       method: "POST",
-      headers: {
-        accept: "*/*",
-        "content-type": "application/json",
-      },
       body: JSON.stringify(raw),
     };
 
