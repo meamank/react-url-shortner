@@ -31,12 +31,11 @@ const Main = () => {
 
     var requestOptions = {
       method: "POST",
-      vary: 'accept',
       headers: myHeaders,
       body: raw,
     };
 
-    fetch("just.darshit.dev/shorten", requestOptions)
+    fetch("https://just.darshit.dev/shorten", requestOptions)
       .then((response) => response.text())
       .then((result) => setShortLink(result))
       .catch((error) => console.log("error", error));
