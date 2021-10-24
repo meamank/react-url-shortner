@@ -27,10 +27,10 @@ const Main = () => {
 
     var requestOptions = {
       method: "POST",
-      body: JSON.stringify(raw),
       headers: {
-        "content-type": "application/json",
-      },
+      'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(raw)
     };
 
     fetch("https://just.darshit.dev/shorten", requestOptions)
