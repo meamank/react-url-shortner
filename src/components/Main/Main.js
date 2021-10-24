@@ -30,7 +30,7 @@ const Main = () => {
       body: JSON.stringify(raw),
     };
 
-    fetch("just.darshit.dev/shorten", requestOptions)
+    fetch("https://just.darshit.dev/shorten", requestOptions)
       .then((response) => response.text())
       .then((result) => setShortLink(result))
       .catch((error) => console.log("error", error));
