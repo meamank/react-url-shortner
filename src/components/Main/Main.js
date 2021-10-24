@@ -3,7 +3,6 @@ import HeroImg from "../../assets/hero.svg";
 import LinkForm from "../UI/LinkForm";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import CloseIcon from "@mui/icons-material/Close";
 import { useRef, useState } from "react";
 import { lightGreen } from "@mui/material/colors";
 
@@ -13,14 +12,33 @@ const Main = () => {
 
   const linkInputRef = useRef();
 
-  const submitHandler = async (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
 
     const enteredLink = linkInputRef.current.value;
 
-    fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
-      .then((response) => response.json())
-      .then((result) => setShortLink(result.result))
+    // fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
+    //   .then((response) => response.json())
+    //   .then((result) => setShortLink(result.result))
+    //   .catch((error) => console.log("error", error));
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      url: enteredLink,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      vary: 'accept',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    fetch("just.darshit.dev/shorten", requestOptions)
+      .then((response) => response.text())
+      .then((result) => setShortLink(result))
       .catch((error) => console.log("error", error));
   };
 
@@ -29,37 +47,7 @@ const Main = () => {
     setClipboardStatus(true);
   };
 
-  // Get the existing data
-  var existing = localStorage.getItem("link");
-
-  // If no existing data, create an array
-  // Otherwise, convert the localStorage string to an array
-  existing = existing ? existing.split(",") : [];
-
-  // Add new data to localStorage Array
-  if (shortLink && existing.length <= 2) {
-    existing.unshift(shortLink.short_link);
-    // Save back to localStorage
-    localStorage.setItem("link", existing.toString());
-  } else if (shortLink && existing.length >= 3) {
-    existing.pop();
-    existing.unshift(shortLink.short_link);
-    localStorage.setItem("link", existing.toString());
-  }
-
-  
-    const removeExistingLinkHandler = (i) => {
-      // existing.splice(i, 1);
-      // localStorage.setItem("link", existing.toString());
-      const updatedArr = existing.filter((item,index) => index !== i)
-      existing = updatedArr
-      localStorage.setItem("link", existing.toString());
-      // console.log(i)
-    };
-  
-  // localStorage.setItem("link", existing.toString());
-
-  console.log(existing);
+  console.log(shortLink)
 
   return (
     <main>
@@ -80,7 +68,7 @@ const Main = () => {
         {shortLink && (
           <div className={classes.result}>
             <p className="result_item">{shortLink.short_link}</p>
-            <button className="copy" onClick={() => copyClipboard("copied")}>
+            <button className="copy" onClick={copyClipboard}>
               {clipboardStatus ? (
                 <DoneAllIcon sx={{ color: lightGreen[500] }} />
               ) : (
@@ -89,27 +77,6 @@ const Main = () => {
             </button>
           </div>
         )}
-        {existing &&
-          existing.map((link, i) => (
-            <div className={classes.result} key={i}>
-              <p>{link}</p>
-              <div className={classes.dual_btn}>
-                <button
-                  className="copy"
-                  onClick={() => copyClipboard("copied")}
-                >
-                  {clipboardStatus ? (
-                    <DoneAllIcon sx={{ color: lightGreen[500] }} />
-                  ) : (
-                    <ContentCopyIcon />
-                  )}
-                </button>
-                <button  >
-                  <CloseIcon onClick={() => removeExistingLinkHandler(i)} />
-                </button>
-              </div>
-            </div>
-          ))}
       </div>
 
       <div className={classes.hero}>
