@@ -21,21 +21,16 @@ const Main = () => {
     //   .then((response) => response.json())
     //   .then((result) => setShortLink(result.result))
     //   .catch((error) => console.log("error", error));
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      url: enteredLink,
-    });
+    const raw = {
+      url: enteredLink
+    }
 
     var requestOptions = {
       method: "POST",
-      headers: myHeaders,
-      body: raw,
+      body: JSON.stringify(raw),
     };
 
-    fetch("https://just.darshit.dev/shorten", requestOptions)
+    fetch("just.darshit.dev/shorten", requestOptions)
       .then((response) => response.text())
       .then((result) => setShortLink(result))
       .catch((error) => console.log("error", error));
