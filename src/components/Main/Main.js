@@ -28,6 +28,9 @@ const Main = () => {
     var requestOptions = {
       method: "POST",
       body: JSON.stringify(raw),
+      headers: {
+        "content-type": "application/json",
+      },
     };
 
     fetch("https://just.darshit.dev/shorten", requestOptions)
@@ -61,7 +64,7 @@ const Main = () => {
 
         {shortLink && (
           <div className={classes.result}>
-            <p className="result_item">{shortLink.short_link}</p>
+            <p className="result_item">{shortLink.shortUrl}</p>
             <button className="copy" onClick={copyClipboard}>
               {clipboardStatus ? (
                 <DoneAllIcon sx={{ color: lightGreen[500] }} />
