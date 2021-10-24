@@ -37,7 +37,7 @@ const Main = () => {
     };
 
     fetch("just.darshit.dev/shorten", requestOptions)
-      .then((response) => response.json())
+      .then((response) => response.text())
       .then((result) => setShortLink(result))
       .catch((error) => console.log("error", error));
   };
