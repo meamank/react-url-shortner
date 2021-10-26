@@ -61,7 +61,7 @@ const Main = () => {
 
         {shortLink && (
           <div className={classes.result}>
-            <p className="result_item">{shortLink.shortUrl}</p>
+            <p className="result_item">{shortLink.short_link}</p>
             <button className="copy" onClick={copyClipboard}>
               {clipboardStatus ? (
                 <DoneAllIcon sx={{ color: lightGreen[500] }} />
