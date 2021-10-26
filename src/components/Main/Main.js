@@ -21,9 +21,9 @@ const Main = () => {
   //    .then((response) => response.json())
   //    .then((result) => setShortLink(result.result))
   //    .catch((error) => console.log("error", error));
-  //   const raw = {
-  //     url: enteredLink
-  //   }
+    const raw = {
+     url: enteredLink
+   }
 
     var requestOptions = {
       method: "POST",
