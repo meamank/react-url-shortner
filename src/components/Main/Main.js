@@ -17,24 +17,24 @@ const Main = () => {
 
     const enteredLink = linkInputRef.current.value;
 
-    // fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
-    //   .then((response) => response.json())
-    //   .then((result) => setShortLink(result.result))
-    //   .catch((error) => console.log("error", error));
-    const raw = {
-      url: enteredLink
-    }
-
-    var requestOptions = {
-      method: "POST",
-      body: JSON.stringify(raw),
-    };
-
-    fetch("https://just.darshit.dev/shorten", requestOptions)
-      .then((response) => response.text())
-      .then((result) => setShortLink(result))
+    fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
+      .then((response) => response.json())
+      .then((result) => setShortLink(result.result))
       .catch((error) => console.log("error", error));
-  };
+  //   const raw = {
+  //     url: enteredLink
+  //   }
+
+  //   var requestOptions = {
+  //     method: "POST",
+  //     body: JSON.stringify(raw),
+  //   };
+
+  //   fetch("https://just.darshit.dev/shorten", requestOptions)
+  //     .then((response) => response.text())
+  //     .then((result) => setShortLink(result))
+  //     .catch((error) => console.log("error", error));
+};
 
   const copyClipboard = () => {
     navigator.clipboard.writeText(shortLink.short_link);
