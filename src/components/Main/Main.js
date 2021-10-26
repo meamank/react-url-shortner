@@ -17,27 +17,27 @@ const Main = () => {
 
     const enteredLink = linkInputRef.current.value;
 
-    fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
-      .then((response) => response.json())
-      .then((result) => setShortLink(result.result))
-      .catch((error) => console.log("error", error));
+   // fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
+  //    .then((response) => response.json())
+  //    .then((result) => setShortLink(result.result))
+  //    .catch((error) => console.log("error", error));
   //   const raw = {
   //     url: enteredLink
   //   }
 
-  //   var requestOptions = {
-  //     method: "POST",
-  //     body: JSON.stringify(raw),
-  //   };
+    var requestOptions = {
+      method: "POST",
+      body: JSON.stringify(raw),
+    };
 
-  //   fetch("https://just.darshit.dev/shorten", requestOptions)
-  //     .then((response) => response.text())
-  //     .then((result) => setShortLink(result))
-  //     .catch((error) => console.log("error", error));
+     fetch("https://just.darshit.dev/shorten", requestOptions)
+       .then((response) => response.text())
+       .then((result) => setShortLink(result))
+       .catch((error) => console.log("error", error));
 };
 
   const copyClipboard = () => {
-    navigator.clipboard.writeText(shortLink.short_link);
+    navigator.clipboard.writeText(shortLink.shortURL);
     setClipboardStatus(true);
   };
 
@@ -61,7 +61,7 @@ const Main = () => {
 
         {shortLink && (
           <div className={classes.result}>
-            <p className="result_item">{shortLink.short_link}</p>
+            <p className="result_item">{shortLink.shortURL}</p>
             <button className="copy" onClick={copyClipboard}>
               {clipboardStatus ? (
                 <DoneAllIcon sx={{ color: lightGreen[500] }} />
