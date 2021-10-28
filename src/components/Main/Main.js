@@ -17,30 +17,31 @@ const Main = () => {
 
     const enteredLink = linkInputRef.current.value;
 
-   // fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
-  //    .then((response) => response.json())
-  //    .then((result) => setShortLink(result.result))
-  //    .catch((error) => console.log("error", error));
-    const raw = {
-     url: enteredLink
-   }
+   fetch(`https://api.shrtco.de/v2/shorten?url=${enteredLink}`)
+     .then((response) => response.json())
+     .then((result) => setShortLink(result.result))
+     .catch((error) => console.log("error", error));
+    
+//     const raw = {
+//      url: enteredLink
+//    }
 
-    var requestOptions = {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(raw),
-    };
+//     var requestOptions = {
+//       method: "POST",
+//       headers: {
+//         "content-type": "application/json",
+//       },
+//       body: JSON.stringify(raw),
+//     };
 
-     fetch("https://just.darshit.dev/shorten", requestOptions)
-       .then((response) => response.text())
-       .then((result) => setShortLink(result))
-       .catch((error) => console.log("error", error));
-};
+//      fetch("https://just.darshit.dev/shorten", requestOptions)
+//        .then((response) => response.text())
+//        .then((result) => setShortLink(result))
+//        .catch((error) => console.log("error", error));
+// };
 
   const copyClipboard = () => {
-    navigator.clipboard.writeText(shortLink.shortURL);
+    navigator.clipboard.writeText(shortLink.short_link);
     setClipboardStatus(true);
   };
 
@@ -64,7 +65,7 @@ const Main = () => {
 
         {shortLink && (
           <div className={classes.result}>
-            <p className="result_item">{shortLink.shortURL}</p>
+            <p className="result_item">{shortLink.short_link}</p>
             <button className="copy" onClick={copyClipboard}>
               {clipboardStatus ? (
                 <DoneAllIcon sx={{ color: lightGreen[500] }} />
