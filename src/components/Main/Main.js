@@ -38,7 +38,7 @@ const Main = () => {
 //        .then((response) => response.text())
 //        .then((result) => setShortLink(result))
 //        .catch((error) => console.log("error", error));
-// };
+};
 
   const copyClipboard = () => {
     navigator.clipboard.writeText(shortLink.short_link);
